@@ -1,0 +1,376 @@
+USHTRIMI 1
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Detyra3
+{ 
+ internal class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            Console.WriteLine("Vendosni nje fjalekalim:");
+            string password  = Console.ReadLine();
+            bool isUpper = password.Any(char.IsUpper);
+            bool isLower = password.Any(char.IsLower);
+            bool hasInt = password.Any(char.IsDigit);
+            bool symbolCheck = password.Any(p => !char.IsLetterOrDigit(p));
+            if (isUpper && isLower && hasInt && symbolCheck)
+            {
+                Console.WriteLine("password i sakte ");
+            }
+            else if (!isUpper)
+            {
+                Console.WriteLine("ska upper");
+            }
+            else if (!isLower)
+            {
+                Console.WriteLine("ska lower");
+            }
+            else if (!hasInt)
+            {
+                Console.WriteLine("ska nr");
+            }
+            else
+            {
+                Console.WriteLine("ska karakter special");
+            }
+            Console.ReadLine();
+        }
+    }
+}
+
+
+USHTRIMI 2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace detyra3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Vendosni Username: ");
+            string username = Console.ReadLine();
+            Console.Write("Vendosni Password: ");
+            string password = Console.ReadLine();
+            int indeks = password.ToLower().IndexOf(username.ToLower());
+            if (indeks == -1)
+                Console.WriteLine("Fjalkalimi eshte ne rregull ");
+            else
+                Console.WriteLine("Fjalekalimi nuk duhet te permbaj Username-in.");
+
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+USHTRIMI 3
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ushtrim3_3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string msg, str1, str2;
+            int index1, index2;
+            Console.WriteLine("Jepni mesazhin :");
+            msg = Console.ReadLine();
+            Console.WriteLine("Jepni pjesen 1 :");
+            str1 = Console.ReadLine();
+            Console.WriteLine("Jepni pjesen e 2:");
+            str2 = Console.ReadLine();
+            index1 = msg.ToLower().IndexOf(str1.ToLower());
+            index2 = msg.ToLower().IndexOf(str2.ToLower());
+
+            if (index1 != -1 && index2 != -1)
+            {
+                if (index1 > index2)
+                {
+                    int temp = index2;
+                    index2 = index1;
+                    index1 = temp;
+                    string temp2 = str1;
+                    str1 = str2;
+                    str2 = temp2;
+                }
+
+                msg = msg.Substring(0, index1) + msg.Substring(index2, str2.Length) + msg.Substring(index1 + str1.Length, index2 - (index1 + str1.Length)) +
+                msg.Substring(index1, str1.Length) + msg.Substring(index2 + str2.Length);
+                Console.WriteLine(msg);
+                
+            }
+            else Console.WriteLine("Fjalet nuk ndodhen ne stringe.");
+
+            Console.ReadLine();
+        }
+    }
+}
+
+
+
+USHTRIMI 4
+
+using System;
+
+namespace DETYRA3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string msg, produkti1, produkti2, produkti3, produktiInput, pergjigja, fatura;
+            int gjendje1, gjendje2, gjendje3, sasiaInput = 0, cmimiInput = 0, totali = 0, shumaPaguar;
+            bool kaGjendje = true;
+            int cmimi1, cmimi2, cmimi3;
+            Console.WriteLine("Miresevjen ne FundamentalsPOS\nVendos 3 produkte ne formatin: -produkt_gjendja_cmimi");
+            msg = Console.ReadLine();
+            produkti1 = msg.Substring(0, msg.IndexOf("_"));
+            msg = msg.Substring(produkti1.Length + 1);
+            int.TryParse(msg.Substring(0, msg.IndexOf("_")), out gjendje1);
+            int.TryParse(msg.Substring(msg.IndexOf("_") + 1), out cmimi1);
+            produkti1 = produkti1.Trim();
+
+            msg = Console.ReadLine();
+            produkti2 = msg.Substring(0, msg.IndexOf("_"));
+            msg = msg.Substring(produkti2.Length + 1);
+            int.TryParse(msg.Substring(0, msg.IndexOf("_")), out gjendje2);
+            int.TryParse(msg.Substring(msg.IndexOf("_") + 1), out cmimi2);
+            produkti2 = produkti2.Trim();
+
+            msg = Console.ReadLine();
+            produkti3 = msg.Substring(0, msg.IndexOf("_"));
+            msg = msg.Substring(produkti3.Length + 1);
+            int.TryParse(msg.Substring(0, msg.IndexOf("_")), out gjendje3);
+            int.TryParse(msg.Substring(msg.IndexOf("_") + 1), out cmimi3);
+            produkti3 = produkti3.Trim();
+
+            Console.WriteLine("3 produktet e vendosura jane:\n=== Produkti 1 ===\nEmri:{0}\nGjendja: {1}\nCmimi: {2}\n", produkti1, gjendje1, cmimi1);
+            Console.WriteLine("=== Produkti 2 ===\nEmri:{0}\nGjendja: {1}\nCmimi: {2}\n", produkti2, gjendje2, cmimi2);
+            Console.WriteLine("=== Produkti 3 ===\nEmri:{0}\nGjendja: {1}\nCmimi: {2}\n", produkti3, gjendje3, cmimi3);
+
+            
+            fatura = "=== Fature ===\n";
+            Console.WriteLine("Vendos emrin e produktit qe deshiron te blesh, dhe shtyp butonin enter: ");
+            produktiInput = Console.ReadLine();
+            if (produktiInput != produkti1 && produktiInput != produkti2 && produktiInput != produkti3)
+            {
+                Console.WriteLine("Produkti nuk mund te gjendet!");
+            }
+            else
+            {
+                Console.WriteLine("Vendos sasine qe deshiron te blesh per produktin:{0}", produktiInput);
+                int.TryParse(Console.ReadLine(), out sasiaInput);
+                if (produktiInput == produkti1)
+                {
+                    if (sasiaInput > gjendje1)
+                    {
+                        Console.WriteLine("Per kete produkt nuk ka {0} cope gjendje!", sasiaInput);
+                        kaGjendje = false;
+                    }
+
+                    else
+                    {
+                        gjendje1 = gjendje1 - sasiaInput;
+                        cmimiInput = cmimi1;
+                    }
+                }
+                else if (produktiInput == produkti2)
+                {
+                    if (sasiaInput > gjendje2)
+                    {
+                        Console.WriteLine("Per kete produkt nuk ka kaq gjendje");
+                        kaGjendje = false;
+                    }
+                    else
+                    {
+                        gjendje2 = gjendje2 - sasiaInput;
+                        cmimiInput = cmimi2;
+                    }
+
+                }
+                else
+                {
+                    if (sasiaInput > gjendje3)
+                    {
+                        Console.WriteLine("Per kete produkt nuk ka kaq gjendje");
+                        kaGjendje = false;
+                    }
+                    else
+                    {
+                        gjendje3 = gjendje3 - sasiaInput;
+                        cmimiInput = cmimi3;
+                    }
+                }
+                if (kaGjendje)
+                {
+                    totali += sasiaInput * cmimiInput;
+                    fatura += $"{produktiInput} | {sasiaInput} cope x {cmimiInput} leke = {sasiaInput * cmimiInput} leke\n";
+
+                }
+                else kaGjendje = true;
+
+            }
+            Console.WriteLine("Deshiron te blesh produkt tjeter? (po/jo)");
+            pergjigja = Console.ReadLine();
+
+            if (pergjigja == "po")
+            {
+                Console.WriteLine("Vendos emrin e produktit qe deshiron te blesh, dhe shtyp butonin enter: ");
+                produktiInput = Console.ReadLine();
+                if (produktiInput != produkti1 && produktiInput != produkti2 && produktiInput != produkti3)
+                {
+                    Console.WriteLine("Produkti nuk mund te gjendet!");
+                }
+                else
+                {
+                    Console.WriteLine("Vendos sasine qe deshiron te blesh per produktin:{0}", produktiInput);
+                    int.TryParse(Console.ReadLine(), out sasiaInput);
+                    if (produktiInput == produkti1)
+                    {
+                        if (sasiaInput > gjendje1)
+                        {
+                            Console.WriteLine("Per kete produkt nuk ka {0} cope gjendje!", sasiaInput);
+                            kaGjendje = false;
+                        }
+                        else
+                        {
+                            gjendje1 = gjendje1 - sasiaInput;
+                            cmimiInput = cmimi1;
+                        }
+                    }
+                    else if (produktiInput == produkti2)
+                    {
+                        if (sasiaInput > gjendje2)
+                        {
+                            Console.WriteLine("Per kete produkt nuk ka {0} cope gjendje!", sasiaInput);
+                            kaGjendje = false;
+                        }
+                        else
+                        {
+                            gjendje2 = gjendje2 - sasiaInput;
+                            cmimiInput = cmimi2;
+                        }
+                    }
+                    else
+                    {
+                        if (sasiaInput > gjendje3)
+                        {
+                            Console.WriteLine("Per kete produkt nuk ka kaq gjendje");
+                            kaGjendje = false;
+                        }
+                        else
+                        {
+                            gjendje3 = gjendje3 - sasiaInput;
+                            cmimiInput = cmimi3;
+                        }
+                    }
+                    if (kaGjendje)
+                    {
+                        fatura += $"{produktiInput} | {sasiaInput} cope x {cmimiInput} leke = {sasiaInput * cmimiInput} leke\n";
+                        totali += sasiaInput * cmimiInput;
+                    }
+
+                    else kaGjendje = true;
+                }
+                Console.WriteLine("Deshiron te blesh produkt tjeter? (po/jo)");
+                pergjigja = Console.ReadLine();
+
+                if (pergjigja == "po")
+                {
+                    Console.WriteLine("Vendos emrin e produktit qe deshiron te blesh, dhe shtyp butonin enter: ");
+                    produktiInput = Console.ReadLine();
+                    if (produktiInput != produkti1 && produktiInput != produkti2 && produktiInput != produkti3)
+                    {
+                        Console.WriteLine("Produkti nuk mund te gjendet!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Vendos sasine qe deshiron te blesh per produktin:{0}", produktiInput);
+                        int.TryParse(Console.ReadLine(), out sasiaInput);
+                        if (produktiInput == produkti1)
+                        {
+                            if (sasiaInput > gjendje1)
+                            {
+                                Console.WriteLine("Per kete produkt nuk ka {0} cope gjendje!", sasiaInput);
+                                kaGjendje = false;
+                            }
+                            else
+                            {
+                                gjendje1 = gjendje1 - sasiaInput;
+                                cmimiInput = cmimi1;
+                            }
+                        }
+                        else if (produktiInput == produkti2)
+                        {
+                            if (sasiaInput > gjendje2)
+                            {
+                                Console.WriteLine("Per kete produkt nuk ka {0} cope gjendje!", sasiaInput);
+                                kaGjendje = false;
+                            }
+                            else
+                            {
+                                gjendje2 = gjendje2 - sasiaInput;
+                                cmimiInput = cmimi2;
+                            }
+                        }
+                        else
+                        {
+                            if (sasiaInput > gjendje3)
+                            {
+                                Console.WriteLine("Per kete produkt nuk ka kaq gjendje");
+                                kaGjendje = false;
+                            }
+                            else
+                            {
+                                gjendje3 = gjendje3 - sasiaInput;
+                                cmimiInput = cmimi3;
+                            }
+                        }
+                        if (kaGjendje)
+                        {
+                            fatura += $"{produktiInput} | {sasiaInput} cope x {cmimiInput} leke = {sasiaInput * cmimiInput} leke\n";
+                            totali += sasiaInput * cmimiInput;
+                        }
+                        else kaGjendje = true;
+                    }
+                }
+            }
+
+            Console.WriteLine(fatura + "\nTotali : " + totali + " Leke");
+            Console.Write("Vendos shumen e paguar:");
+            int.TryParse(Console.ReadLine(), out shumaPaguar);
+            if (shumaPaguar < totali)
+            {
+                Console.WriteLine("Pagesa e kryer nuk mjafton! Duhen edhe {0} leke.", (totali - shumaPaguar));
+                Console.ReadLine();
+                return;
+            }
+
+            Console.WriteLine("Kusuri : " + (shumaPaguar - totali) + "leke");
+            Console.WriteLine("\nFaleminderit qe zgjodhet FundamentalsPOS\n=== Gjendja e magazines pas shitjeve===");
+            Console.WriteLine("{0}\t\t|  {1}", produkti1, gjendje1);
+            Console.WriteLine("{0}\t\t|  {1}", produkti2, gjendje2);
+            Console.WriteLine("{0}\t\t|  {1}", produkti3, gjendje3);
+            Console.ReadLine();
+
+        }
+    }
+}
+
